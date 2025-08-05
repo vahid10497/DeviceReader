@@ -9,15 +9,16 @@
       const ua = navigator.userAgent || navigator.vendor || window.opera;
 
       if (/iPad|iPhone|iPod/.test(ua) && !window.MSStream) {
-        // iOS → Adobe Aero
+        // iOS: go to Adobe Aero
         window.location.href = "https://adobeaero.app.link/mUyogpmV9Ub";
       } else if (/android/i.test(ua)) {
-        // Android → delayed redirect to 8th Wall
+        // Android: go to 8th Wall with a short delay (to ensure camera/WebXR loads properly)
         setTimeout(() => {
           window.location.href = "https://vahidqaderi.8thwall.app/locationbase/";
-        }, 150); // <- key: short delay to stabilize WebXR loading
+        }, 150); // short delay helps avoid crash or blocked permissions
       } else {
-        document.body.innerHTML = "<h2>Please scan this code on a mobile device.</h2>";
+        // Fallback for desktop
+        document.body.innerHTML = "<h2>This experience is designed for mobile devices.</h2>";
       }
     };
   </script>
