@@ -12,12 +12,12 @@
         // iOS → Adobe Aero
         window.location.href = "https://adobeaero.app.link/mUyogpmV9Ub";
       } else if (/android/i.test(ua)) {
-        // Android → delayed redirect to avoid permission issues
+        // Android → delayed redirect to 8th Wall
         setTimeout(() => {
           window.location.href = "https://vahidqaderi.8thwall.app/locationbase/";
-        }, 150); // short delay to improve stability
+        }, 150); // <- key: short delay to stabilize WebXR loading
       } else {
-        document.body.innerHTML = "<h2>Please scan this code on your phone.</h2>";
+        document.body.innerHTML = "<h2>Please scan this code on a mobile device.</h2>";
       }
     };
   </script>
@@ -30,6 +30,6 @@
   </style>
 </head>
 <body>
-  <p>Redirecting based on your device...</p>
+  <p>Redirecting...</p>
 </body>
 </html>
