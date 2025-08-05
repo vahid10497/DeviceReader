@@ -3,27 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Redirecting...</title>
+  <title>Continue to AR</title>
   <script>
-    (function () {
+    window.onload = () => {
       const ua = navigator.userAgent || navigator.vendor || window.opera;
-      const isAndroid = /android/i.test(ua);
-      const isiOS = /iPhone|iPad|iPod/.test(ua) && !window.MSStream;
 
-      // Make sure redirect happens after DOM is ready
-      window.addEventListener("DOMContentLoaded", function () {
-        if (isiOS) {
-          window.location.replace("https://adobeaero.app.link/mUyogpmV9Ub");
-        } else if (isAndroid) {
-          window.location.replace("https://adobeaero.app.link/mUyogpmV9Ub");
-        } else {
-          document.body.innerHTML = `
-            <h2>This AR experience is designed for mobile devices.</h2>
-            <p>Please scan this QR code with a smartphone camera.</p>
-          `;
-        }
-      });
-    })();
+      if (/iPad|iPhone|iPod/.test(ua) && !window.MSStream) {
+        window.location.href = "https://adobeaero.app.link/mUyogpmV9Ub";
+      } else if (/android/i.test(ua)) {
+        document.getElementById("android-button").style.display = "block";
+      } else {
+        document.body.innerHTML = "<h2>Please open this experience on a mobile device.</h2>";
+      }
+    };
   </script>
   <style>
     body {
@@ -31,9 +23,22 @@
       text-align: center;
       padding: 40px;
     }
+    #android-button {
+      display: none;
+      font-size: 20px;
+      padding: 15px 30px;
+      background-color: black;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      margin-top: 30px;
+    }
   </style>
 </head>
 <body>
-  <p>Redirecting based on your device...</p>
+  <p>Redirecting...</p>
+  <button id="android-button" onclick="window.location.href='https://vahidqaderi.8thwall.app/locationbase/'">
+    Tap to open AR experience
+  </button>
 </body>
 </html>
