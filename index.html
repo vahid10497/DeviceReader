@@ -3,17 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Continue to AR</title>
+  <title>Redirecting...</title>
   <script>
-    window.onload = () => {
+    window.onload = function () {
       const ua = navigator.userAgent || navigator.vendor || window.opera;
 
       if (/iPad|iPhone|iPod/.test(ua) && !window.MSStream) {
+        // iOS → Adobe Aero
         window.location.href = "https://adobeaero.app.link/mUyogpmV9Ub";
       } else if (/android/i.test(ua)) {
-        document.getElementById("android-button").style.display = "block";
+        // Android → delayed redirect to avoid permission issues
+        setTimeout(() => {
+          window.location.href = "https://vahidqaderi.8thwall.app/locationbase/";
+        }, 150); // short delay to improve stability
       } else {
-        document.body.innerHTML = "<h2>Please open this experience on a mobile device.</h2>";
+        document.body.innerHTML = "<h2>Please scan this code on your phone.</h2>";
       }
     };
   </script>
@@ -23,22 +27,9 @@
       text-align: center;
       padding: 40px;
     }
-    #android-button {
-      display: none;
-      font-size: 20px;
-      padding: 15px 30px;
-      background-color: black;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      margin-top: 30px;
-    }
   </style>
 </head>
 <body>
-  <p>Redirecting...</p>
-  <button id="android-button" onclick="window.location.href='https://vahidqaderi.8thwall.app/locationbase/'">
-    Tap to open AR experience
-  </button>
+  <p>Redirecting based on your device...</p>
 </body>
 </html>
