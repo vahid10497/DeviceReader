@@ -5,23 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Redirecting...</title>
   <script>
-    window.onload = function () {
+    (function () {
       const ua = navigator.userAgent || navigator.vendor || window.opera;
+      const isAndroid = /android/i.test(ua);
+      const isiOS = /iPhone|iPad|iPod/.test(ua) && !window.MSStream;
 
-      if (/android/i.test(ua)) {
-        // Android → 8th Wall experience
-        window.location.href = "https://vahidqaderi.8thwall.app/locationbase/";
-      } else if (/iPad|iPhone|iPod/.test(ua) && !window.MSStream) {
-        // iOS → Adobe Aero experience
-        window.location.href = "https://adobeaero.app.link/mUyogpmV9Ub";
-      } else {
-        // Desktop or unsupported device
-        document.body.innerHTML = `
-          <h2>This experience is intended for mobile devices only.</h2>
-          <p>Scan this QR code with your phone camera to continue.</p>
-        `;
-      }
-    };
+      // Make sure redirect happens after DOM is ready
+      window.addEventListener("DOMContentLoaded", function () {
+        if (isiOS) {
+          window.location.replace("https://adobeaero.app.link/mUyogpmV9Ub");
+        } else if (isAndroid) {
+          window.location.replace("https://vahidqaderi.8thwall.app/locationbase/");
+        } else {
+          document.body.innerHTML = `
+            <h2>This AR experience is designed for mobile devices.</h2>
+            <p>Please scan this QR code with a smartphone camera.</p>
+          `;
+        }
+      });
+    })();
   </script>
   <style>
     body {
@@ -32,6 +34,6 @@
   </style>
 </head>
 <body>
-  <p>Redirecting...</p>
+  <p>Redirecting based on your device...</p>
 </body>
 </html>
